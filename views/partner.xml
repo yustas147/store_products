@@ -9,7 +9,8 @@
             <field name="sequence">20</field>
             <field name="arch" type="xml">
                 <xpath expr="//notebook" position="inside">
-                    <page string="Vendor`s products">
+                    <page string="Vendor`s products and placement">
+                        <group>
                             <field name='partner_product_info_ids'>
                                 <tree>
                                     <field name='name'/>
@@ -17,6 +18,9 @@
                                     <field name='price_one_gram'/>
                                 </tree>
                             </field>
+                            <field name='near_stores'/>
+                            <field name='near_stores_rev'/>
+                        </group>
                     </page>
                 </xpath>       
             </field>

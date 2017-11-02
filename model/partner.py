@@ -21,5 +21,13 @@ class res_partner(models.Model):
     partner_product_info_ids = fields.One2many(comodel_name='partner.product.info', 
                                               inverse_name='partner_id', 
                                               string='Partner`s production info')
+    near_stores = fields.Many2many(comodel_name='res.partner', relation='near_partners_rel', 
+                                  column1='leftp', 
+                                  column2='rightp', 
+                                  string='These are near')
+    near_stores_rev = fields.Many2many(comodel_name='res.partner', relation='near_partners_rel', 
+                                  column1='rightp', 
+                                  column2='leftp', 
+                                  string='Is near to these')
     
         
