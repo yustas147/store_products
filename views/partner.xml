@@ -8,18 +8,29 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="sequence">20</field>
             <field name="arch" type="xml">
-                <xpath expr="//notebook" position="inside">
+                <xpath expr="//notebook/page[@string='Internal Notes']" position="before">
                     <page string="Vendor`s products and placement">
-                        <group>
-                            <field name='partner_product_info_ids'>
+                        <group string='Products'>
+                            <field name='partner_product_info_ids' nolabel='1'>
                                 <tree>
                                     <field name='name'/>
                                     <field name='product_id'/>
                                     <field name='price_one_gram'/>
                                 </tree>
                             </field>
-                            <field name='near_stores'/>
-                            <field name='near_stores_rev'/>
+                        </group>
+                        <group colspan='2' string='Nearby partners'>
+                            <field name='near_stores' widget='many2many_kanban' nolabel='1'/>
+                            <field name='near_stores_rev' widget='many2many_kanban' nolabel='1'/>
+                                <!--<kanban>-->
+                                    <!--<field name="name"/>-->
+                                    <!--<templates>-->
+                                        <!--<t t-name="kanban-box">-->
+                                            <!--<field name="name"/>-->
+                                        <!--</t>-->
+                                    <!--</templates>-->
+                                <!--</kanban>-->
+                            <!--</field>-->
                         </group>
                     </page>
                 </xpath>       
