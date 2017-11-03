@@ -8,7 +8,9 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="sequence">20</field>
             <field name="arch" type="xml">
-                <xpath expr="//notebook/page[@string='Internal Notes']" position="before">
+                <!--<xpath expr="//notebook/page[@string='Internal Notes']" position="before">-->
+                <!--<xpath expr="//notebook" position="inside">-->
+                <xpath expr="//notebook//page[1]" position="before">
                     <page string="Vendor`s products and placement">
                         <group string='Products'>
                             <field name='partner_product_info_ids' nolabel='1'>
