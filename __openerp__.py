@@ -8,7 +8,7 @@
     'version': '1.0.0',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'product', 'crm'],
+    'depends': ['base', 'product', 'crm', 'partner_social_fields'],
 #    'depends': ['sale', 'purchase', 'mrp', 'sce'],
 
     # always loaded

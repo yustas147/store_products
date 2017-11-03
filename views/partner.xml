@@ -38,5 +38,22 @@
                 </xpath>       
             </field>
         </record>
+        
+         <record model="ir.ui.view" id="vendor_supplier_info_inherits_base_res_partner_kanban_view">
+            <field name="name">vendor.supplier.info.kanban.view</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+            <field name="sequence">20</field>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position='inside'>
+                    <field name="i502"/>
+                </xpath>
+                <xpath expr="//div[@class='oe_kanban_details']/ul" position='inside'>
+                    <!--<li t-if="record.i502.raw_value"><field name="i502"/></li>-->
+                    <li t-if="record.i502.raw_value"><a t-attf-href="#{record.i502.raw_value}" t-attf-target='_blank' t-attf-style='color:green'><field name="i502"/></a></li>
+                    
+                </xpath>
+            </field>
+         </record>
    </data>
 </openerp>
