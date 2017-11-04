@@ -12,7 +12,7 @@ class base_parser(object):
     
     def take_from_url(self):
         if self.url:
-            res = requests.get(self.url).text
+            res = requests.get(self.url, allow_redirects=True, verify=False).text
             self.page_text = res
             return(self.page_text)
     

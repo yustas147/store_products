@@ -24,7 +24,8 @@ class res_partner(models.Model):
         for item in self:
             try:
                 if item.partner_license_key:
-                    item.i502 = 'https://502data.com/license/' + unicode(item.partner_license_key)
+                    item.i502 = 'http://502data.com/license/' + unicode(item.partner_license_key)
+                    #item.i502 = 'https://502data.com/license/' + unicode(item.partner_license_key)
             except AttributeError :
                 pass
             if item.i502:
