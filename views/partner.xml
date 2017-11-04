@@ -12,6 +12,10 @@
                 <!--<xpath expr="//notebook" position="inside">-->
                 <xpath expr="//notebook//page[1]" position="before">
                     <page string="Vendor`s products and placement">
+                        <group col="3" colspan="2">    
+                          <field name='last_month_sales'/>
+                          <button name='get_lms_i502' type='object' string='Get last month sales'/>
+                        </group>
                         <group string='Products'>
                             <field name='partner_product_info_ids' nolabel='1'>
                                 <tree>
@@ -47,10 +51,12 @@
             <field name="arch" type="xml">
                 <xpath expr="//kanban" position='inside'>
                     <field name="i502"/>
+                    <field name="last_month_sales"/>
                 </xpath>
                 <xpath expr="//div[@class='oe_kanban_details']/ul" position='inside'>
                     <!--<li t-if="record.i502.raw_value"><field name="i502"/></li>-->
                     <li t-if="record.i502.raw_value"><a t-attf-href="#{record.i502.raw_value}" t-attf-target='_blank' t-attf-style='color:green'><field name="i502"/></a></li>
+                    <li t-if="record.last_month_sales.raw_value"><a  t-attf-style='color:green'><field name="last_month_sales"/></a></li>
                     
                 </xpath>
             </field>

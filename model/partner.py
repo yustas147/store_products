@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from openerp import models, fields, api
 import logging
+from ..unit import base_parser
 
 _logger = logging.getLogger(__name__)
 
@@ -16,6 +17,20 @@ class res_partner(models.Model):
     
     _inherit = 'res.partner'
     
+    
+    @api.multi
+    def get_lms_i502(self):
+        #self.ensure_one()
+        for item in self:
+            try:
+                if item.partner_license_key:
+                    item.i502 = 'https://502data.com/license/' + unicode(item.partner_license_key)
+            except AttributeError :
+                pass
+            if item.i502:
+                parser = base_parser.i502_sales_lm_total(item.i502)
+                item.last_month_sales = parser.get_result()[0]
+        
     #supplier_info_ids = fields.One2many(comodel_name='product.supplierinfo', inverse_name='name', string='Vendor`s product offerings')
     #pricelist_partnerinfo_ids = fields.One2many(comodel_name='pricelist.partnerinfo', inverse_name='vendor_id', string='Vendor`s product offerings')
     partner_product_info_ids = fields.One2many(comodel_name='partner.product.info', 
@@ -29,5 +44,7 @@ class res_partner(models.Model):
                                   column1='rightp', 
                                   column2='leftp', 
                                   string='Is near to these')
+    
+    last_month_sales = fields.Char(string='Last Month`s Sales')
     
         
