@@ -15,6 +15,9 @@
                         <group col="3" colspan="2">    
                           <field name='last_month_sales'/>
                           <button name='get_lms_i502' type='object' string='Get last month sales'/>
+                          <field name='image_url'/>
+                          <button name='get_image' type='object' string='Get image'/>
+                          
                         </group>
                         <group string='Products'>
                             <field name='partner_product_info_ids' nolabel='1'>
