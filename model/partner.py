@@ -24,7 +24,10 @@ class res_partner(models.Model):
                 
                 fetcher = bin_fetcher.b_fetcher(self.image_url)
                 image_name = fetcher.get_file_name_from_url()
-                addons_path = './'
+                if os.name == 'nt':
+                    addons_path = './'
+                else:
+                    addons_path = '/opt/odoo/'
 #                addons_path = i.env.http.addons_manifest['web']['addons_path']
                 _logger.info('Addons path is: %s' % unicode(addons_path))
                 full_name = os.path.join(addons_path, image_name)

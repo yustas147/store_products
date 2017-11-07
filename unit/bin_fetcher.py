@@ -6,6 +6,7 @@ import urllib2
 import logging
 #from openerp import http
 import base64
+from os import name as os_name
 
 class b_fetcher():
     
@@ -14,7 +15,10 @@ class b_fetcher():
         
     def __init__(self, url):
         self.set_url(url)
-        self.local_fs_path = './%s' % self.get_file_name_from_url()
+        if os_name == 'nt':
+            self.local_fs_path = './%s' % self.get_file_name_from_url()
+        else:
+            self.local_fs_path = '/opt/odoo/%s' % self.get_file_name_from_url()
     
     def fetch(self):
         bfile = urllib2.urlopen(self.url)
