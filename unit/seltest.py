@@ -1,6 +1,7 @@
 from selenium import webdriver
 
-driver = webdriver.Chrome()
+#driver = webdriver.Chrome()
+driver = webdriver.PhantomJS(executable_path="c:\\Python27\\phantomjs.exe", port=7777)
 driver.get("https://502data.com/license/415645")
 #driver.get("http://www.youtube.com/results?search_query=" + "guitar+lessons")
 
