@@ -44,6 +44,7 @@ class base_parser(object):
         result = html_tree.xpath(block_pattern)
         _logger.info('get_block_unparsed_lines result  : %s'  % unicode(result))
         _logger.info('len(result)  : %s'  % unicode(len(result)))
+        _logger.info('result[0]  : %s'  % unicode(result[0]))
         
         try:
             result = result[0]
