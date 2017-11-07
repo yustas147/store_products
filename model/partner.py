@@ -59,7 +59,10 @@ class res_partner(models.Model):
                 pass
             if item.i502:
                 parser = base_parser.i502_sales_lm_total(item.i502)
-                item.last_month_sales, item.total_sales, item.image_url = parser.get_result()
+                res = parser.get_result()
+                if res:
+                    if len(res) == 3:
+                        item.last_month_sales, item.total_sales, item.image_url = res
                 
         
     #supplier_info_ids = fields.One2many(comodel_name='product.supplierinfo', inverse_name='name', string='Vendor`s product offerings')

@@ -40,14 +40,19 @@ class base_parser(object):
             else:
                 html_tree = self.html_tree
                 
-        result = html_tree.xpath(block_pattern)[0]
+        try:
+            result = html_tree.xpath(block_pattern)[0]
+        except IndexError:
+            return False
+        
         self.block_unparsed_lines = result
         return self.block_unparsed_lines
     
     def get_unparsed_lines(self, pattern=None):
         if not self.block_unparsed_lines:
-            self.get_block_unparsed_lines()
-        return self.block_unparsed_lines.xpath(pattern)
+            if self.get_block_unparsed_lines():
+                return self.block_unparsed_lines.xpath(pattern)
+        return False
     
     def get_record_uline_patt(uline, patt):
         ''' Get record from unparsed line uline using pattern patt'''
@@ -81,9 +86,11 @@ class i502_sales_lm_total(base_parser):
         s.get_html_tree()            
         s.get_block_unparsed_lines(block_pattern='//table[@class="table table-bordered table-striped"]')            
         unparsed_lines =  s.get_unparsed_lines(pattern='.//tr')        
-        lm_sales, total, image = unparsed_lines[1][1].text, unparsed_lines[-1][1].text, self.get_image(
-            './/div[@class="col-md-8"]/div[@class="pull-left"]/a/img/@src') 
-        return lm_sales, total, image        
+        if unparsed_lines:
+            lm_sales, total, image = unparsed_lines[1][1].text, unparsed_lines[-1][1].text, self.get_image(
+                './/div[@class="col-md-8"]/div[@class="pull-left"]/a/img/@src') 
+            return lm_sales, total, image        
+        return False
             
 
 if __name__=='__main__':
