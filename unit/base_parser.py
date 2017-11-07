@@ -41,10 +41,9 @@ class base_parser(object):
                 html_tree = self.html_tree
                 
         _logger.info('get_block_unparsed_lines returns  : %s'  % unicode(html_tree))
+        result = html_tree.xpath(block_pattern)
+        _logger.info('get_block_unparsed_lines result  : %s'  % unicode(result))
         try:
-            result = html_tree.xpath(block_pattern)
-            _logger.info('get_block_unparsed_lines result  : %s'  % unicode(result))
-            
             result = html_tree.xpath(block_pattern)[0]
         except IndexError:
             return False
