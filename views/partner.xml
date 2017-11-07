@@ -10,6 +10,11 @@
             <field name="arch" type="xml">
                 <!--<xpath expr="//notebook/page[@string='Internal Notes']" position="before">-->
                 <!--<xpath expr="//notebook" position="inside">-->
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button name='get502data' string='Update data from i502' type='object'/>
+                    </header>
+                </xpath>
                 <xpath expr="//notebook//page[1]" position="before">
                     <page string="Vendor`s products and placement">
                         <group col="3" colspan="2">    
