@@ -49,9 +49,8 @@ class base_parser(object):
         return self.block_unparsed_lines
     
     def get_unparsed_lines(self, pattern=None):
-        if not self.block_unparsed_lines:
-            if self.get_block_unparsed_lines():
-                return self.block_unparsed_lines.xpath(pattern)
+        if self.get_block_unparsed_lines():
+            return self.block_unparsed_lines.xpath(pattern)
         return False
     
     def get_record_uline_patt(uline, patt):
