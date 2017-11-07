@@ -57,7 +57,11 @@ class base_parser(object):
     def get_unparsed_lines(self, pattern=None):
         
         _logger.info('gul pattern is : %s'  % unicode(pattern))
-        gbul = self.block_unparsed_lines
+        try:
+            gbul = self.block_unparsed_lines
+        except AttributeError:
+            return False
+            
 #        gbul = self.get_block_unparsed_lines(self.block_unparsed_lines, pattern)
         _logger.info('gbul : %s'  % unicode(gbul))
         if gbul:
