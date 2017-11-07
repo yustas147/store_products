@@ -40,6 +40,7 @@ class base_parser(object):
             else:
                 html_tree = self.html_tree
                 
+        _logger.info('get_block_unparsed_lines returns  : %s'  % unicode(html_tree))
         try:
             result = html_tree.xpath(block_pattern)[0]
         except IndexError:
@@ -56,7 +57,8 @@ class base_parser(object):
             _logger.info('get_unparsed_lines returns  : %s'  % unicode(res))
             return res
         else:
-            _logger.info('get_unparsed_lines returns  : %s'  % unicode(unparsed_lines))
+            pass
+            #_logger.info('get_unparsed_lines returns  : %s'  % unicode(unparsed_lines))
         return False
     
     def get_record_uline_patt(uline, patt):
