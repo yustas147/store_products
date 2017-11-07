@@ -62,8 +62,10 @@ class base_parser(object):
         html_tree = self.get_html_tree()        
         #image_link = html_tree.xpath(patt)[0]
         
-        #driver = webdriver.PhantomJS(executable_path="c:\\Python27\\phantomjs.exe", port=7777, service_log_path=os.path.devnull)
-        driver = webdriver.PhantomJS(executable_path="/usr/bin/phantomjs", port=7777, service_log_path=os.path.devnull)
+        if os.name == 'nt':
+            driver = webdriver.PhantomJS(executable_path="c:\\Python27\\phantomjs.exe", port=7777, service_log_path=os.path.devnull)
+        else:
+            driver = webdriver.PhantomJS(executable_path="/usr/bin/phantomjs", port=7777, service_log_path=os.path.devnull)
         driver.get(self.url)
         results = driver.find_elements_by_xpath('.//div[@class="col-md-8"]/div[@class="pull-left"]/a/img')
         image_link = results[0].get_attribute('src')
