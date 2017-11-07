@@ -61,6 +61,7 @@ class res_partner(models.Model):
                 parser = base_parser.i502_sales_lm_total(item.i502)
                 res = parser.get_result()
                 if res:
+                    _logger.info('get_lms_i502 res is : %s'  % unicode(res))
                     if len(res) == 3:
                         item.last_month_sales, item.total_sales, item.image_url = res
                 

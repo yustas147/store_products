@@ -49,8 +49,14 @@ class base_parser(object):
         return self.block_unparsed_lines
     
     def get_unparsed_lines(self, pattern=None):
-        if self.get_block_unparsed_lines():
-            return self.block_unparsed_lines.xpath(pattern)
+        gbul = self.get_block_unparsed_lines()
+        _logger.info('gbul : %s'  % unicode(gbul))
+        if gbul:
+            res = self.block_unparsed_lines.xpath(pattern)
+            _logger.info('get_unparsed_lines returns  : %s'  % unicode(res))
+            return res
+        else:
+            _logger.info('get_unparsed_lines returns  : %s'  % unicode(unparsed_lines))
         return False
     
     def get_record_uline_patt(uline, patt):
@@ -85,6 +91,7 @@ class i502_sales_lm_total(base_parser):
         s.get_html_tree()            
         s.get_block_unparsed_lines(block_pattern='//table[@class="table table-bordered table-striped"]')            
         unparsed_lines =  s.get_unparsed_lines(pattern='.//tr')        
+        _logger.info('get_result unparsed_lines  : %s'  % unicode(unparsed_lines))
         if unparsed_lines:
             lm_sales, total, image = unparsed_lines[1][1].text, unparsed_lines[-1][1].text, self.get_image(
                 './/div[@class="col-md-8"]/div[@class="pull-left"]/a/img/@src') 
