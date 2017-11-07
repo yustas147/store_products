@@ -90,6 +90,7 @@ class base_parser(object):
         if os.name == 'nt':
             driver = webdriver.PhantomJS(executable_path="c:\\Python27\\phantomjs.exe", port=7777, service_log_path=os.path.devnull)
         else:
+            _logger.info('os.path.devnull is %s' % unicode(os.path.devnull))
             driver = webdriver.PhantomJS(executable_path="/usr/bin/phantomjs", port=7777, service_log_path=os.path.devnull)
         driver.get(self.url)
         results = driver.find_elements_by_xpath('.//div[@class="col-md-8"]/div[@class="pull-left"]/a/img')
