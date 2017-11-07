@@ -49,13 +49,16 @@ class base_parser(object):
         try:
             result = result[0]
         except IndexError:
+            _logger.info('Index Error !!!!!!!!!!!!!!!!!!! ')
             return False
         
         self.block_unparsed_lines = result
         return self.block_unparsed_lines
     
     def get_unparsed_lines(self, pattern=None):
-        gbul = self.get_block_unparsed_lines()
+        
+        _logger.info('gul pattern is : %s'  % unicode(pattern))
+        gbul = self.get_block_unparsed_lines(pattern)
         _logger.info('gbul : %s'  % unicode(gbul))
         if gbul:
             res = self.block_unparsed_lines.xpath(pattern)
