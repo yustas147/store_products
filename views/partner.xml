@@ -8,20 +8,16 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="sequence">20</field>
             <field name="arch" type="xml">
-                <!--<xpath expr="//notebook/page[@string='Internal Notes']" position="before">-->
-                <!--<xpath expr="//notebook" position="inside">-->
-                <xpath expr="//sheet" position="before">
-                    <header>
-                        <button name='get502data' string='Update data from i502' type='object'/>
-                    </header>
+                <xpath expr="//field[@name='title']" position="after">
+                          <field name='last_month_sales'/>
+                          <field name='total_sales'/>
                 </xpath>
+                
                 <xpath expr="//notebook//page[1]" position="before">
                     <page string="Vendor`s products and placement">
                         <group col="3" colspan="2">    
-                          <field name='last_month_sales'/>
-                          <button name='get_lms_i502' type='object' string='Get last month sales'/>
-                          <field name='image_url'/>
-                          <button name='get_image' type='object' string='Get image'/>
+                          <!--<field name='image_url'/>-->
+                          <!--<button name='get_image' type='object' string='Get image'/>-->
                           
                         </group>
                         <group string='Products'>
@@ -33,6 +29,9 @@
                                 </tree>
                             </field>
                         </group>
+                        <label for='plk'/>
+                        <field name='plk'/>
+                        
                         <group colspan='2' string='Nearby partners'>
                             <field name='near_stores' widget='many2many_kanban' nolabel='1'/>
                             <field name='near_stores_rev' widget='many2many_kanban' nolabel='1'/>
@@ -50,6 +49,18 @@
                 </xpath>       
             </field>
         </record>
+        <record model="ir.ui.view" id="vendor_supplier_info_inherits_base_view_partner_tree">
+            <field name="name">vendor.supplier.info.form.tree</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="sequence">20</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='email']" position="after">
+                          <field name='last_month_sales'/>
+                          <field name='total_sales'/>
+                </xpath>
+            </field>
+         </record>
         
          <record model="ir.ui.view" id="vendor_supplier_info_inherits_base_res_partner_kanban_view">
             <field name="name">vendor.supplier.info.kanban.view</field>

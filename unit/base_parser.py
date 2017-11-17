@@ -79,6 +79,14 @@ class base_parser(object):
         result = uline.xpath(patt)[0] 
         return result
     
+    def get_phantomjs_driver(self):
+        if os.name == 'nt':
+            driver = webdriver.PhantomJS(executable_path="c:\\Python27\\phantomjs.exe", port=7777, service_log_path=os.path.devnull)
+        else:
+            _logger.info('os.path.devnull is %s' % unicode(os.path.devnull))
+            driver = webdriver.PhantomJS(executable_path="/usr/bin/phantomjs", port=7777, service_log_path=os.path.devnull)        
+        return driver
+
     def get_image(self, patt):
         #if not self.html_tree:
             #html_tree = self.get_html_tree()
@@ -94,10 +102,43 @@ class base_parser(object):
             driver = webdriver.PhantomJS(executable_path="/usr/bin/phantomjs", port=7777, service_log_path=os.path.devnull)
         driver.get(self.url)
         results = driver.find_elements_by_xpath('.//div[@class="col-md-8"]/div[@class="pull-left"]/a/img')
-        image_link = results[0].get_attribute('src')
-        driver.quit()
+        ires = results[0]
+        image_link = ires.get_attribute('src')
+        kushguide_href = ires.get_attribute('href')
+        if kushguide_href  and signup not in kushguide_href:
+            self.kushguide_link = kushguide_href
+            _logger.info('kushguide_href is %s' % unicode(self.kushguide_link))
+        #driver.quit()
         
         return image_link
+
+    
+class basic_parser(object):
+    
+    def get_phantomjs_driver(self):
+        if os.name == 'nt':
+            driver = webdriver.PhantomJS(executable_path="c:\\Python27\\phantomjs.exe", port=7777, service_log_path=os.path.devnull)
+        else:
+            _logger.info('os.path.devnull is %s' % unicode(os.path.devnull))
+            driver = webdriver.PhantomJS(executable_path="/usr/bin/phantomjs", port=7777, service_log_path=os.path.devnull)        
+        return driver    
+    
+    def set_phantomjs_driver(self):
+        self.driver = self.get_phantomjs_driver()
+        return self.driver
+    
+    
+    
+class phantomjs_parser(basic_parser):
+    
+    def __init__(self):
+        set_phantomjs_driver()
+    
+    def get_page(self, url):
+        return self.driver.get(url)
+    
+    
+    
     
 class i502_sales_lm_total(base_parser):
 
@@ -115,6 +156,21 @@ class i502_sales_lm_total(base_parser):
             return lm_sales, total, image        
         return False
             
+class kushguide_parser(i502_sales_lm_total):
+    
+    def get_website(self, kushguide_link=False):
+        if kushguide_link:
+            self.kushguide_link = kushguide_link
+        if self.kushguide_link:
+            driver = self.get_phantomjs_driver()
+            driver.get(self.kushguide_link)
+            self.website = driver.find_elements_by_xpath('.//li/a[@data-ng-show="store.website"]/')[0].get_attribute('href')
+            if self.website:
+                return(self.website)
+            
+        
+    
+    
 
 if __name__=='__main__':
     myparser = base_parser('https://502data.com/license/415645')    

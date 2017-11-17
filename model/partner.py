@@ -45,7 +45,18 @@ class res_partner(models.Model):
 #                i.env['ir.attachment'].create({'name':image_name, 'type':'url', 'res_id':i.id, 'res_model':'res.partner', 'url':i.image_url})
                 
             
-    
+    @api.multi
+    def fetch_i502(self):
+        for i in self:
+            try:
+                if i.partner_license_key:
+                    i.i502 = 'http://502data.com/license/' + unicode(i.partner_license_key)
+            except AttributeError :
+                pass
+            if i.i502:            
+                driver = base_parser.phantomjs_parser()
+                html_page = driver.get_page(i.i502)
+
     
     @api.multi
     def get_lms_i502(self):
@@ -82,6 +93,7 @@ class res_partner(models.Model):
     
     last_month_sales = fields.Char(string='Last Month`s Sales')
     total_sales = fields.Char(string='Total Sales')
+    plk = fields.Char(string='PLK')
     
     image_url = fields.Char(string='Image url')
     
