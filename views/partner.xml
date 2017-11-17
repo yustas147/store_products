@@ -11,6 +11,8 @@
                 <xpath expr="//field[@name='title']" position="after">
                           <field name='last_month_sales'/>
                           <field name='total_sales'/>
+                          <button name='get_lms_i502' type='object' string='Get i502'/>
+                          <button name='get_image' type='object' string='Get Partner Image'/>
                 </xpath>
                 
                 <xpath expr="//notebook//page[1]" position="before">
