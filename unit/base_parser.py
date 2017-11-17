@@ -95,7 +95,7 @@ class base_parser(object):
         driver.get(self.url)
         results = driver.find_elements_by_xpath('.//div[@class="col-md-8"]/div[@class="pull-left"]/a/img')
         image_link = results[0].get_attribute('src')
-        driver.quit()
+        #driver.quit()
         
         return image_link
     
