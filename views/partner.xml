@@ -2,6 +2,8 @@
 <openerp>
     <data>
         
+        
+            
         <record model="ir.ui.view" id="vendor_supplier_info_inherits_base_view_partner_form">
             <field name="name">vendor.supplier.info.form.view</field>
             <field name="model">res.partner</field>
@@ -63,6 +65,9 @@
             <field name="inherit_id" ref="base.view_partner_tree"/>
             <field name="sequence">20</field>
             <field name="arch" type="xml">
+                <!--<tree  position="attributes">-->
+                    <!--<attribute name="default_order">last_month_sales desc</attribute>-->
+                <!--</tree>-->
                 <xpath expr="//field[@name='email']" position="after">
                           <field name='last_month_sales'/>
                           <field name='total_sales'/>

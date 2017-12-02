@@ -91,8 +91,10 @@ class res_partner(models.Model):
                                   column2='leftp', 
                                   string='Is near to these')
     
-    last_month_sales = fields.Char(string='Last Month`s Sales')
-    total_sales = fields.Char(string='Total Sales')
+    last_month_sales = fields.Float(string='Last Month`s Sales')
+#    last_month_sales = fields.Char(string='Last Month`s Sales')
+    total_sales = fields.Float(string='Total Sales')
+#    total_sales = fields.Char(string='Total Sales')
     plk = fields.Char(string='PLK')
     
     image_url = fields.Char(string='Image url')
