@@ -101,5 +101,8 @@ class res_partner(models.Model):
     def get502data(self):
         self.get_lms_i502()
         if self.image_url:
-            self.get_image()
+            try:
+                self.get_image()
+            except:
+                pass
         
