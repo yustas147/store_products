@@ -8,11 +8,15 @@
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="sequence">20</field>
             <field name="arch" type="xml">
+            
+                <xpath expr="//header" position="inside">
+                          <button name='get_image' type='object' string='Get Partner Image' attrs="{'invisible':[('image_url', '=', False)]}"/>
+                
+                </xpath>
                 <xpath expr="//field[@name='title']" position="after">
                           <field name='last_month_sales'/>
                           <field name='total_sales'/>
-                          <button name='get_lms_i502' type='object' string='Get i502'/>
-                          <button name='get_image' type='object' string='Get Partner Image'/>
+                          <!--<button name='get_lms_i502' type='object' string='Get i502'/>-->
                 </xpath>
                 
                 <xpath expr="//notebook//page[1]" position="before">
@@ -31,8 +35,10 @@
                                 </tree>
                             </field>
                         </group>
-                        <label for='plk'/>
-                        <field name='plk'/>
+                        <group col="4" colspan="2">
+                            <!--<field name='plk'/>-->
+                            <field name='image_url' attrs="{'invisible': True}"/>
+                        </group>
                         
                         <group colspan='2' string='Nearby partners'>
                             <field name='near_stores' widget='many2many_kanban' nolabel='1'/>
