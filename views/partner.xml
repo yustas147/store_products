@@ -18,6 +18,7 @@
                 <xpath expr="//field[@name='title']" position="after">
                           <field name='last_month_sales'/>
                           <field name='total_sales'/>
+                          <field name='order_minimum'/>
                           <!--<button name='get_lms_i502' type='object' string='Get i502'/>-->
                 </xpath>
                 
@@ -43,17 +44,26 @@
                         </group>
                         
                         <group colspan='2' string='Nearby partners'>
-                            <field name='near_stores' widget='many2many_kanban' nolabel='1'/>
-                            <field name='near_stores_rev' widget='many2many_kanban' nolabel='1'/>
-                                <!--<kanban>-->
-                                    <!--<field name="name"/>-->
-                                    <!--<templates>-->
-                                        <!--<t t-name="kanban-box">-->
-                                            <!--<field name="name"/>-->
-                                        <!--</t>-->
-                                    <!--</templates>-->
-                                <!--</kanban>-->
-                            <!--</field>-->
+                            <!--<field name='near_stores' widget='many2many_kanban' nolabel='1'>-->
+                            <field name='near_stores' nolabel='1'>
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="last_month_sales"/>
+                                    <field name="total_sales"/>
+                                    <field name="email"/>
+                                    <field name="phone"/>
+                                </tree>
+                            </field>
+                            <!--<field name='near_stores_rev' widget='many2many_kanban' nolabel='1'/>-->
+                            <field name='near_stores_rev' nolabel='1'>
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="last_month_sales"/>
+                                    <field name="total_sales"/>
+                                    <field name="email"/>
+                                    <field name="phone"/>
+                                </tree>
+                            </field>
                         </group>
                     </page>
                 </xpath>       

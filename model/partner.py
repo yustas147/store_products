@@ -75,6 +75,16 @@ class res_partner(models.Model):
                     _logger.info('get_lms_i502 res is : %s'  % unicode(res))
                     if len(res) == 3:
                         item.last_month_sales, item.total_sales, item.image_url = res
+    
+ 
+    @api.multi
+    def get502data(self):
+        self.get_lms_i502()
+        if self.image_url:
+            try:
+                self.get_image()
+            except:
+                pass    
                 
         
     #supplier_info_ids = fields.One2many(comodel_name='product.supplierinfo', inverse_name='name', string='Vendor`s product offerings')
@@ -99,12 +109,6 @@ class res_partner(models.Model):
     
     image_url = fields.Char(string='Image url')
     
-    @api.multi
-    def get502data(self):
-        self.get_lms_i502()
-        if self.image_url:
-            try:
-                self.get_image()
-            except:
-                pass
+    order_minimum = fields.Float(string="Order Minimum", default=1500.00)
+   
         
